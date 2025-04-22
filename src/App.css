@@ -7,6 +7,7 @@
 .task-card {
   cursor: grab;
   transition: all 0.2s ease;
+  touch-action: none;
 }
 
 .task-card:hover {
@@ -18,6 +19,7 @@
   cursor: grabbing;
 }
 
+/* Custom scrollbar for task columns */
 .task-column::-webkit-scrollbar {
   width: 6px;
 }
@@ -35,6 +37,7 @@
   background: #999;
 }
 
+/* Modal styling */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -48,6 +51,38 @@
   z-index: 1050;
 }
 
+/* Make sure modal is on top of overlay */
 .modal {
   z-index: 1060;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .task-card.dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .task-column {
+    max-height: 50vh;
+  }
+}
+
+/* Alternative task movement for mobile */
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
 }

@@ -27,7 +27,7 @@ function App() {
       }
       let data = await response.json();
       
-      // Transform data to fit our schema 
+      // Transform data to fit our schema (since jsonplaceholder doesn't have status field)
       data = data.slice(0, 15).map(item => ({
         id: item.id,
         title: item.title,
@@ -60,7 +60,8 @@ function App() {
       
       const data = await response.json();
       
-      // For jsonplaceholder, it doesn't actually save our data but returns a response with an id
+      // For jsonplaceholder, it doesn't actually save our data
+      // but returns a response with an id
       const taskWithId = {
         ...newTask,
         id: data.id || tasks.length + 1
@@ -95,7 +96,8 @@ function App() {
         throw new Error('Failed to update task status');
       }
       
-      // Note: jsonplaceholder doesn't actually update the data but would return a response in a real API
+      // Note: jsonplaceholder doesn't actually update the data
+      // but would return a response in a real API
     } catch (err) {
       // Revert the optimistic update if API call fails
       setError(err.message);
@@ -147,6 +149,7 @@ function App() {
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
+            onStatusChange={updateTaskStatus}
           />
         ))}
       </div>
